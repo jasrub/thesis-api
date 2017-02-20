@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cors from 'cors';
 
 /* -------------------------------- */
 /* Initialize development variables */

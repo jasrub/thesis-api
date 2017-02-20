@@ -4,7 +4,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const Sequelize = require('sequelize');
-require('sequelize-hierarchy')(Sequelize);
 
 const useSSL = process.env.DATABASE_URL.indexOf('localhost:') === -1;
 const sequelize = new Sequelize(process.env.DATABASE_URL, { logging: false, dialectOptions: { ssl: useSSL } });
