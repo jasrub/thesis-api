@@ -10,7 +10,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, { logging: false, dial
 
 // Change to true to update the model in the database.
 // NOTE: This being set to true will erase your data.
-sequelize.sync({ force: false });
+sequelize.sync({ force: true });
 
 
 const ReviewDiff = sequelize.define('ReviewDiff', {
@@ -25,11 +25,8 @@ const ReviewDiff = sequelize.define('ReviewDiff', {
 	numReviewers: {
 		type: Sequelize.INTEGER,
 	},
-	singleBlind: {
-		type: Sequelize.BOOLEAN,
-	},
-	doubleBlind: {
-		type: Sequelize.BOOLEAN,
+	reviewType: {
+		type: Sequelize.TEXT,
 	},
 	accepted: {
 		type: Sequelize.BOOLEAN,
