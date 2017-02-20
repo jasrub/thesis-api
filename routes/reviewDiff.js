@@ -1,8 +1,7 @@
 import Promise from 'bluebird';
 import app from '../server';
 import { ReviewDiff } from '../models';
-import { encryptPhone } from '../utilities/encryption';
-import { generateTextCode } from '../utilities/generateHash';
+import { encryptString } from '../utilities/encryption';
 
 
 
@@ -10,7 +9,7 @@ export function postReviewDiff(req, res, next) {
 	const phoneHash = encryptPhone(req.body.phone);
 	const locData = { zipcode: req.body.zipcode };
 	return res.status(201).json('Running');
-	
+
 	ReviewDiff.create({
 		
 	})
