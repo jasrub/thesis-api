@@ -9,6 +9,8 @@ import { generateTextCode } from '../utilities/generateHash';
 export function postReviewDiff(req, res, next) {	
 	const phoneHash = encryptPhone(req.body.phone);
 	const locData = { zipcode: req.body.zipcode };
+	return res.status(201).json('Running');
+	
 	ReviewDiff.create({
 		
 	})
