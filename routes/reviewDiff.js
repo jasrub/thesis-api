@@ -6,10 +6,14 @@ import { encryptString } from '../utilities/encryption';
 
 
 export function postReviewDiff(req, res, next) {	
-	return res.status(201).json('Running');
-
 	ReviewDiff.create({
-		
+		before: req.body.before,
+		after: req.body.after,
+		numReviewers: req.body.numReviewers,
+		singleBlind: req.body.singleBlind,
+		doubleBlind: req.body.doubleBlind,
+		reviewDuration: req.body.reviewDuration,
+		accepted: req.body.accepted,
 	})
 	.then(function(result) {
 		return res.status(201).json(true);

@@ -31,6 +31,9 @@ const ReviewDiff = sequelize.define('ReviewDiff', {
 	doubleBlind: {
 		type: Sequelize.BOOLEAN,
 	},
+	accepted: {
+		type: Sequelize.BOOLEAN,
+	},
 	reviewDuration: {
 		type: Sequelize.INTEGER,
 	},
