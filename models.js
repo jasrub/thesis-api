@@ -34,13 +34,57 @@ const ReviewDiff = sequelize.define('ReviewDiff', {
 	reviewDuration: {
 		type: Sequelize.INTEGER,
 	},
-
-	
 });
 
+const Dinosaur = sequelize.define('Dinosaur', {
+	reviewContent: {
+		type: Sequelize.TEXT,
+		allowNull: false,
+	},
+	reviewRating: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+	},
+	age: {
+		type: Sequelize.TEXT,
+		allowNull: false,
+	},
+	levelOfEducation: {
+		type: Sequelize.TEXT,
+		allowNull: false,
+	},
+	isScientist: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
+	},
+	hasReviewed: {
+		type: Sequelize.TEXT,
+		allowNull: false,
+	},
+	hasBeenReviewed: {
+		type: Sequelize.TEXT,
+		allowNull: false,
+	},
+	interestedInTopic: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
+	},
+	field: {
+		type: Sequelize.TEXT,
+		allowNull: false,
+	},
+	feedback: {
+		type: Sequelize.TEXT,
+		allowNull: false,
+	},
+	usedInterface: {
+		type: Sequelize.BOOLEAN,
+	},
+});
 
 const db = {
 	ReviewDiff: ReviewDiff,
+	Dinosaur: Dinosaur,
 };
 
 db.sequelize = sequelize;
