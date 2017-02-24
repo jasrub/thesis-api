@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import request from 'request-promise';
 import app from '../server';
 import { mturkClient, Dinosaur } from '../models';
 
@@ -28,7 +29,18 @@ app.post('/dinosaur', postDinosaur);
 
 export function postBeef(req, res, next) {
 	console.log(req.body);
-	return mturkClient.req('ApproveAssignment', { AssignmentId: req.body.assignmentId })
+	const url = process.env.IS_PRODUCTION_API === 'TRUE'
+		? `https://www.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&completed=true`
+		: `https://workersandbox.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&completed=true`;
+
+	return request({
+		method: 'POST',
+		uri: url,
+	})
+	.then(function(amazonSubmitResponse) {
+		console.log('HIT Submitted ', JSON.stringify(amazonSubmitResponse, null, 2));
+		return mturkClient.req('ApproveAssignment', { AssignmentId: req.body.assignmentId });	
+	})
 	.then(function(amazonResponse) {
 		console.log('HIT Approved ', JSON.stringify(amazonResponse, null, 2));
 		return res.status(201).json(true);	

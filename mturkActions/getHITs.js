@@ -50,9 +50,9 @@ mturk.createClient(config)
 			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 			AssignmentDurationInSeconds: 360, // Allow 3 minutes to answer 
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
-			MaxAssignments: 100, // 100 worker responses 
+			MaxAssignments: 1, // 1 worker responses 
 			LifetimeInSeconds: 86400 * 3, // Expire in 3 days 
-			Reward: { CurrencyCode: 'USD', Amount: 0.50 }
+			Reward: { CurrencyCode: 'USD', Amount: 0.13 }
 		};
 		return mturkClient.req('CreateHIT', params);
 	})
