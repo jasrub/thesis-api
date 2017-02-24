@@ -79,7 +79,7 @@ if (process.env.WORKER !== 'true') {
 	/* ------------------- */
 	/* ------------------- */
 
-	const port = process.env.PORT || 9875;
+	const port = process.env.PORT || 9876;
 	app.listen(port, (err) => {
 		if (err) { console.error(err); }
 		console.info('----\n==> 🌎  API is running on port %s', port);

@@ -12,6 +12,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "mturk": "node mturkActions/initMturkActions",
     "start": "nodemon api.js"
   },
   "dependencies": {
@@ -29,21 +30,20 @@
     "connect-session-sequelize": "^3.1.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
-    "crypto": "0.0.3",
     "crypto-js": "^3.1.9-1",
     "eslint": "^3.10.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.6.0",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
+    "mturk-api": "^3.0.2",
     "nodemon": "^1.11.0",
     "pg": "^6.1.0",
-    "redis": "^2.6.5",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
-    "sequelize": "^3.30.0"
+    "sequelize": "^3.30.0",
+    "xml-escape": "^1.1.0"
   }
 }
