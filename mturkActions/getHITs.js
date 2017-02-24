@@ -62,13 +62,13 @@ mturk.createClient(config)
 
 	
 })
-.then(function() { 
-	// Approve HIT
-	return mturkClient.req('ApproveAssignment', { AssignmentId: '3DEL4X4EL7WNEKLCMMMRP18QE99YXB' })
-	.then(function(res){
-		console.log('HIT Approved ', JSON.stringify(res, null, 2));
-	});	
-})
+// .then(function() { 
+// 	// Approve HIT
+// 	return mturkClient.req('ApproveAssignment', { AssignmentId: '3DEL4X4EL7WNEKLCMMMRP18QE99YXB' })
+// 	.then(function(res){
+// 		console.log('HIT Approved ', JSON.stringify(res, null, 2));
+// 	});	
+// })
 .catch(function(err) {
 	console.log('Error: ', err);
 });

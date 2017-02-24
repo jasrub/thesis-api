@@ -32,9 +32,8 @@ const whitelist = [
 	'http://localhost:3000',
 
 	// Primary
-	'https://www.pubpub.org',
-	'https://dev.pubpub.org',
-	'https://staging.pubpub.org',
+	'https://experiments.pubpub.org',
+	'https://dev-experiments.pubpub.org',
 ];
 
 const corsOptions = {
