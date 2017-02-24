@@ -31,8 +31,8 @@ app.post('/dinosaur', postDinosaur);
 export function postBeef(req, res, next) {
 	console.log(req.body);
 	const url = process.env.IS_PRODUCTION_API === 'TRUE'
-		? 'https://www.mturk.com/mturk/externalSubmit'
-		: 'http://workersandbox.mturk.com/mturk/externalSubmit';
+		? `https://www.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&foo=bar`
+		: `http://workersandbox.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&foo=bar`; // HTTPS is failing here, even though the docs mandate it. No clue...
 
 	return request({
 		method: 'POST',
