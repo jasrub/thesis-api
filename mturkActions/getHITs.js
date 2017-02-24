@@ -35,32 +35,30 @@ mturk.createClient(config)
 // 	});
 // })
 
-// .then(function() { 
-// 	// Create HITs
-// 	return new Promise(function(resolve, reject) {
-// 		fs.readFile(path.join(__dirname, './externalQuestion.xml'), 'utf8', function (err, data) {
-// 			if (err) { reject(err); }
-// 			resolve(xmlescape(data));
-// 		});
-// 	})
+.then(function() { 
+	// Create HITs
+	return new Promise(function(resolve, reject) {
+		fs.readFile(path.join(__dirname, './externalQuestion.xml'), 'utf8', function (err, data) {
+			if (err) { reject(err); }
+			resolve(xmlescape(data));
+		});
+	})
 	.then(function(xmlQuestion) {
 		const params = {
-			Title: "Create HIT Example",
-			Description: "An example of how to create a HIT",
-			Question: xmlQuestion,//IMPORTANT: XML NEEDS TO BE ESCAPED! 
+			Title: 'Create HIT Example',
+			Description: 'An example of how to create a HIT',
+			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 			AssignmentDurationInSeconds: 360, // Allow 3 minutes to answer 
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
 			MaxAssignments: 100, // 100 worker responses 
 			LifetimeInSeconds: 86400 * 3, // Expire in 3 days 
-			Reward: {CurrencyCode:'USD', Amount:0.50}
+			Reward: { CurrencyCode: 'USD', Amount: 0.50 }
 		};
-		return mturkClient.req('CreateHIT', params)
+		return mturkClient.req('CreateHIT', params);
 	})
-	.then(function(res){
+	.then(function(res) {
 		console.log('HITs Created ', JSON.stringify(res, null, 2));
 	});
-
-	
 })
 // .then(function() { 
 // 	// Approve HIT

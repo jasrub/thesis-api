@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 import app from '../server';
-import { Dinosaur } from '../models';
+import { mturkClient, Dinosaur } from '../models';
 
 export function postDinosaur(req, res, next) {	
 	Dinosaur.create({
@@ -28,7 +28,16 @@ app.post('/dinosaur', postDinosaur);
 
 export function postBeef(req, res, next) {
 	console.log(req.body);
-	return res.status(201).json(true);
+	return mturkClient.req('ApproveAssignment', { AssignmentId: req.body.assignmentId })
+	.then(function(amazonResponse) {
+		console.log('HIT Approved ', JSON.stringify(amazonResponse, null, 2));
+		return res.status(201).json(true);	
+	})
+	.catch(function(err) {
+		console.error('Error in postBeef: ', err);
+		return res.status(500).json(err);
+	});
+	
 
 	Dinosaur.create({
 		reviewContent: req.body.reviewContent,
