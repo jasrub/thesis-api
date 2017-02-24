@@ -30,8 +30,8 @@ app.post('/dinosaur', postDinosaur);
 export function postBeef(req, res, next) {
 	console.log(req.body);
 	const url = process.env.IS_PRODUCTION_API === 'TRUE'
-		? `https://www.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&foo=true`
-		: `https://workersandbox.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&foo=true`;
+		? `https://www.mturk.com/mturk/externalSubmit`
+		: `https://workersandbox.mturk.com/mturk/externalSubmit`;
 
 	return request({
 		method: 'POST',
