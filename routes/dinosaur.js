@@ -1,7 +1,8 @@
 import Promise from 'bluebird';
 import request from 'request-promise';
+import mturk from 'mturk-api';
 import app from '../server';
-import { mturkClient, Dinosaur } from '../models';
+import { mturkConfig, Dinosaur } from '../models';
 
 export function postDinosaur(req, res, next) {	
 	Dinosaur.create({
@@ -43,6 +44,9 @@ export function postBeef(req, res, next) {
 	})
 	.then(function(amazonSubmitResponse) {
 		console.log('HIT Submitted ', JSON.stringify(amazonSubmitResponse, null, 2));
+		return mturk.createClient(mturkConfig);
+	})
+	.then(function(mturkClient) {
 		return mturkClient.req('ApproveAssignment', { AssignmentId: req.body.assignmentId });	
 	})
 	.then(function(amazonResponse) {

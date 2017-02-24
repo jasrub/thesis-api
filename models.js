@@ -1,23 +1,15 @@
 import Promise from 'bluebird';
-import mturk from 'mturk-api';
 if (process.env.NODE_ENV !== 'production') {
 	require('./config.js');
 }
 
 /* Initialize MTurk */
 /* ---------------- */
-const config = {
+const mturkConfig = {
 	access: process.env.AWS_ACCESS_KEY_ID,
 	secret: process.env.AWS_SECRET_ACCESS_KEY,
 	sandbox: true
 };
-
-let mturkClient;
-mturk.createClient(config).then(function(api) {
-	mturkClient = api;
-	return api;
-});
-
 /* ---------------- */
 
 
@@ -107,6 +99,6 @@ const db = {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-db.mturkClient = mturkClient;
+db.mturkConfig = mturkConfig;
 
 module.exports = db;
