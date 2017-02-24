@@ -12,7 +12,9 @@ const config = {
 	sandbox: true
 };
 
-const mturkClient = mturk.createClient(config).then(function(api) {
+let mturkClient;
+mturk.createClient(config).then(function(api) {
+	mturkClient = api;
 	return api;
 });
 
