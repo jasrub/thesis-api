@@ -31,16 +31,16 @@ app.post('/dinosaur', postDinosaur);
 export function postBeef(req, res, next) {
 	console.log(req.body);
 	const url = process.env.IS_PRODUCTION_API === 'TRUE'
-		? `https://www.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&foo=bar`
-		: `http://workersandbox.mturk.com/mturk/externalSubmit?assignmentId=${req.body.assignmentId}&foo=bar`;
+		? 'https://www.mturk.com/mturk/externalSubmit'
+		: 'http://workersandbox.mturk.com/mturk/externalSubmit';
 
 	return request({
 		method: 'POST',
 		uri: url,
-		// form: {
-		// 	assignmentId: req.body.assignmentId,
-		// 	foo: 'bar',
-		// }
+		form: {
+			assignmentId: req.body.assignmentId,
+			foo: 'bar',
+		}
 	})
 	.then(function(amazonSubmitResponse) {
 		console.log('HIT Submitted ', JSON.stringify(amazonSubmitResponse, null, 2));
