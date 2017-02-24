@@ -36,6 +36,10 @@ export function postBeef(req, res, next) {
 	return request({
 		method: 'POST',
 		uri: url,
+		form: {
+			assignmentId: req.body.assignmentId,
+			completed: true,
+		}
 	})
 	.then(function(amazonSubmitResponse) {
 		console.log('HIT Submitted ', JSON.stringify(amazonSubmitResponse, null, 2));

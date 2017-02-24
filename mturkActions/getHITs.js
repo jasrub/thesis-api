@@ -52,7 +52,7 @@ mturk.createClient(config)
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
 			MaxAssignments: 1, // 1 worker responses 
 			LifetimeInSeconds: 86400 * 3, // Expire in 3 days 
-			Reward: { CurrencyCode: 'USD', Amount: 0.13 }
+			Reward: { CurrencyCode: 'USD', Amount: 0.15 }
 		};
 		return mturkClient.req('CreateHIT', params);
 	})
