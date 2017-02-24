@@ -37,10 +37,10 @@ export function postBeef(req, res, next) {
 	return request({
 		method: 'POST',
 		uri: url,
-		// form: {
-		// 	assignmentId: req.body.assignmentId,
-		// 	foo: true,
-		// }
+		form: {
+			assignmentId: req.body.assignmentId,
+			foo: 'bar',
+		}
 	})
 	.then(function(amazonSubmitResponse) {
 		console.log('HIT Submitted ', JSON.stringify(amazonSubmitResponse, null, 2));
