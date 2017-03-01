@@ -9,11 +9,10 @@ export function getDinosaur(req, res, next) {
 		}
 	})
 	.then(function(count) {
-		console.log(count);
 		return res.status(201).json(count === 0);
 	})
 	.catch(function(err) {
-		console.error('Error in postDino: ', err);
+		console.error('Error in getDino: ', err);
 		return res.status(500).json(err);
 	});
 }
@@ -50,42 +49,3 @@ export function postDinosaur(req, res, next) {
 	});
 }
 app.post('/dino', postDinosaur);
-
-// export function postBeef(req, res, next) {
-// 	console.log(req.body);
-
-// 	return mturk.createClient(mturkConfig)
-// 	.then(function(mturkClient) {
-// 		return mturkClient.req('ApproveAssignment', { AssignmentId: req.body.assignmentId });	
-// 	})
-// 	.then(function(amazonResponse) {
-// 		return res.status(201).json(true);	
-// 	})
-// 	.catch(function(err) {
-// 		console.error('Error in postBeef: ', err);
-// 		return res.status(500).json(err);
-// 	});
-	
-
-// 	Dinosaur.create({
-// 		reviewContent: req.body.reviewContent,
-// 		reviewRating: req.body.reviewRating,
-// 		age: req.body.age,
-// 		levelOfEducation: req.body.levelOfEducation,
-// 		isScientist: req.body.isScientist,
-// 		hasReviewed: req.body.hasReviewed,
-// 		hasBeenReviewed: req.body.hasBeenReviewed,
-// 		interestedInTopic: req.body.interestedInTopic,
-// 		field: req.body.field,
-// 		feedback: req.body.feedback,
-// 		usedInterface: req.body.usedInterface,
-// 	})
-// 	.then(function(result) {
-// 		return res.status(201).json(true);
-// 	})
-// 	.catch(function(err) {
-// 		console.error('Error in postBeef: ', err);
-// 		return res.status(500).json(err);
-// 	});
-// }
-// app.post('/beef', postBeef);
