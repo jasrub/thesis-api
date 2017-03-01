@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 const mturkConfig = {
 	access: process.env.AWS_ACCESS_KEY_ID,
 	secret: process.env.AWS_SECRET_ACCESS_KEY,
-	sandbox: true
+	sandbox: process.env.IS_PRODUCTION_API !== 'TRUE',
 };
 /* ---------------- */
 

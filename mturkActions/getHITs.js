@@ -50,7 +50,7 @@ mturk.createClient(config)
 			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 			AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
-			MaxAssignments: 1, // 1 worker responses 
+			MaxAssignments: 3, // 1 worker responses 
 			LifetimeInSeconds: 86400 * 1, // Expire in 3 days 
 			Reward: { CurrencyCode: 'USD', Amount: 1.00 },
 		};
