@@ -21,6 +21,7 @@ app.get('/dino', getDinosaur);
 export function postDinosaur(req, res, next) {	
 	return mturk.createClient(mturkConfig)
 	.then(function(mturkClient) {
+		if (!req.body.assignmentId) { return true; }
 		return mturkClient.req('ApproveAssignment', { AssignmentId: req.body.assignmentId });	
 	})
 	.then(function(amazonResponse) {
@@ -28,6 +29,10 @@ export function postDinosaur(req, res, next) {
 			mode: req.body.mode,
 			reviewContent: req.body.reviewContent,
 			reviewRating: req.body.reviewRating,
+			offsetValues: req.body.offsetValues,
+			offsetInteractions: req.body.offsetInteractions,
+			timeOnReview: req.body.timeOnReview,
+			scrollValues: req.body.scrollValues,
 			levelOfEducation: req.body.levelOfEducation,
 			isScientist: req.body.isScientist,
 			hasReviewed: req.body.hasReviewed,

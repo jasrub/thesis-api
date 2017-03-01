@@ -35,6 +35,18 @@ const Dinosaur = sequelize.define('Dinosaur', {
 		type: Sequelize.INTEGER,
 		allowNull: false,
 	},
+	offsetValues: {
+		type: Sequelize.TEXT,
+	},
+	offsetInteractions: {
+		type: Sequelize.TEXT,
+	},
+	timeOnReview: {
+		type: Sequelize.TEXT,
+	},
+	scrollValues: {
+		type: Sequelize.TEXT,
+	},
 	levelOfEducation: {
 		type: Sequelize.TEXT,
 		allowNull: false,
