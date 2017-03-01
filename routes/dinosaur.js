@@ -2,6 +2,23 @@ import mturk from 'mturk-api';
 import app from '../server';
 import { mturkConfig, Dinosaur } from '../models';
 
+export function getDinosaur(req, res, next) {	
+	return Dinosaur.count({
+		where: {
+			workerId: req.query.workerId
+		}
+	})
+	.then(function(count) {
+		console.log(count);
+		return res.status(201).json(count === 0);
+	})
+	.catch(function(err) {
+		console.error('Error in postDino: ', err);
+		return res.status(500).json(err);
+	});
+}
+app.get('/dino', getDinosaur);
+
 export function postDinosaur(req, res, next) {	
 	return mturk.createClient(mturkConfig)
 	.then(function(mturkClient) {
@@ -9,6 +26,7 @@ export function postDinosaur(req, res, next) {
 	})
 	.then(function(amazonResponse) {
 		return Dinosaur.create({
+			mode: req.body.mode,
 			reviewContent: req.body.reviewContent,
 			reviewRating: req.body.reviewRating,
 			levelOfEducation: req.body.levelOfEducation,

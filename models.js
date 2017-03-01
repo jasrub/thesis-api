@@ -23,6 +23,10 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, { logging: false, dial
 sequelize.sync({ force: false });
 
 const Dinosaur = sequelize.define('Dinosaur', {
+	mode: {
+		type: Sequelize.INTEGER,
+		allowNull: false,
+	},
 	reviewContent: {
 		type: Sequelize.TEXT,
 		allowNull: false,
