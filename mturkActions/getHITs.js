@@ -45,14 +45,14 @@ mturk.createClient(config)
 	})
 	.then(function(xmlQuestion) {
 		const params = {
-			Title: 'Create HIT Example 12',
+			Title: 'Create HIT Example 14',
 			Description: 'An example of how to create a HIT',
 			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 			AssignmentDurationInSeconds: 9360, // Allow 3 minutes to answer 
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
 			MaxAssignments: 1, // 1 worker responses 
 			LifetimeInSeconds: 86400 * 3, // Expire in 3 days 
-			Reward: { CurrencyCode: 'USD', Amount: 0.27 }
+			Reward: { CurrencyCode: 'USD', Amount: 0.29 }
 		};
 		return mturkClient.req('CreateHIT', params);
 	})
