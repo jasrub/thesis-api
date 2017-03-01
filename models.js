@@ -22,30 +22,6 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, { logging: false, dial
 // NOTE: This being set to true will erase your data.
 sequelize.sync({ force: false });
 
-
-const ReviewDiff = sequelize.define('ReviewDiff', {
-	before: {
-		type: Sequelize.TEXT, 
-		allowNull: false, 
-	},
-	after: { 
-		type: Sequelize.TEXT, 
-		allowNull: false, 
-	},
-	numReviewers: {
-		type: Sequelize.INTEGER,
-	},
-	reviewType: {
-		type: Sequelize.TEXT,
-	},
-	accepted: {
-		type: Sequelize.BOOLEAN,
-	},
-	reviewDuration: {
-		type: Sequelize.INTEGER,
-	},
-});
-
 const Dinosaur = sequelize.define('Dinosaur', {
 	reviewContent: {
 		type: Sequelize.TEXT,
@@ -53,10 +29,6 @@ const Dinosaur = sequelize.define('Dinosaur', {
 	},
 	reviewRating: {
 		type: Sequelize.INTEGER,
-		allowNull: false,
-	},
-	age: {
-		type: Sequelize.TEXT,
 		allowNull: false,
 	},
 	levelOfEducation: {
@@ -79,21 +51,22 @@ const Dinosaur = sequelize.define('Dinosaur', {
 		type: Sequelize.BOOLEAN,
 		allowNull: false,
 	},
-	field: {
-		type: Sequelize.TEXT,
-		allowNull: false,
-	},
 	feedback: {
 		type: Sequelize.TEXT,
 		allowNull: false,
 	},
-	usedInterface: {
-		type: Sequelize.BOOLEAN,
+	workerId: {
+		type: Sequelize.TEXT,
+	},
+	assignmentId: {
+		type: Sequelize.TEXT,
+	},
+	hitId: {
+		type: Sequelize.TEXT,
 	},
 });
 
 const db = {
-	ReviewDiff: ReviewDiff,
 	Dinosaur: Dinosaur,
 };
 

@@ -8,15 +8,16 @@ export function postDinosaur(req, res, next) {
 	Dinosaur.create({
 		reviewContent: req.body.reviewContent,
 		reviewRating: req.body.reviewRating,
-		age: req.body.age,
 		levelOfEducation: req.body.levelOfEducation,
 		isScientist: req.body.isScientist,
 		hasReviewed: req.body.hasReviewed,
 		hasBeenReviewed: req.body.hasBeenReviewed,
 		interestedInTopic: req.body.interestedInTopic,
-		field: req.body.field,
 		feedback: req.body.feedback,
 		usedInterface: req.body.usedInterface,
+		workerId: req.body.workerId,
+		assignmentId: req.body.assignmentId,
+		hitId: req.body.hitId,
 	})
 	.then(function(result) {
 		return res.status(201).json(true);
@@ -26,7 +27,7 @@ export function postDinosaur(req, res, next) {
 		return res.status(500).json(err);
 	});
 }
-app.post('/dinosaur', postDinosaur);
+app.post('/dino', postDinosaur);
 
 export function postBeef(req, res, next) {
 	console.log(req.body);
