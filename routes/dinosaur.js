@@ -18,11 +18,15 @@ export function getDinosaur(req, res, next) {
 }
 app.get('/dino', getDinosaur);
 
-export function postDinosaur(req, res, next) {	
+export function postDinosaur(req, res, next) {
+	console.log(req.body);
 	return mturk.createClient(mturkConfig)
 	.then(function(mturkClient) {
 		if (!req.body.assignmentId) { return true; }
 		return mturkClient.req('ApproveAssignment', { AssignmentId: req.body.assignmentId });	
+	})
+	.catch(function(err) {
+		console.error('Error in postDino mTurk Client Approve: ', err);
 	})
 	.then(function(amazonResponse) {
 		return Dinosaur.create({
