@@ -45,14 +45,14 @@ mturk.createClient(config)
 	})
 	.then(function(xmlQuestion) {
 		const params = {
-			Title: 'Create HIT Example 16',
-			Description: 'An example of how to create a HIT',
+			Title: 'Review a Scientific Paper on Dinosaurs (fixed bug)',
+			Description: 'We ask you to review a short paper (5 min read) on dinosaurs and provide your review of the work.',
 			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
-			AssignmentDurationInSeconds: 9360, // Allow 3 minutes to answer 
+			AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
 			MaxAssignments: 1, // 1 worker responses 
-			LifetimeInSeconds: 86400 * 3, // Expire in 3 days 
-			Reward: { CurrencyCode: 'USD', Amount: 0.31 }
+			LifetimeInSeconds: 86400 * 1, // Expire in 3 days 
+			Reward: { CurrencyCode: 'USD', Amount: 1.00 },
 		};
 		return mturkClient.req('CreateHIT', params);
 	})
