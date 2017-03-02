@@ -1,4 +1,4 @@
 <ExternalQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd">
-  <ExternalURL>https://experiments.pubpub.org/dino</ExternalURL>
+  <ExternalURL>https://dev-experiments.pubpub.org/dino</ExternalURL>
   <FrameHeight>600</FrameHeight>
 </ExternalQuestion>
