@@ -23,63 +23,22 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, { logging: false, dial
 sequelize.sync({ force: false });
 
 const Dinosaur = sequelize.define('Dinosaur', {
-	mode: {
-		type: Sequelize.INTEGER,
-		allowNull: false,
-	},
-	reviewContent: {
-		type: Sequelize.TEXT,
-		allowNull: false,
-	},
-	reviewRating: {
-		type: Sequelize.INTEGER,
-		allowNull: false,
-	},
-	offsetValues: {
-		type: Sequelize.TEXT,
-	},
-	offsetInteractions: {
-		type: Sequelize.TEXT,
-	},
-	timeOnReview: {
-		type: Sequelize.TEXT,
-	},
-	scrollValues: {
-		type: Sequelize.TEXT,
-	},
-	levelOfEducation: {
-		type: Sequelize.TEXT,
-		allowNull: false,
-	},
-	isScientist: {
-		type: Sequelize.BOOLEAN,
-		allowNull: false,
-	},
-	hasReviewed: {
-		type: Sequelize.TEXT,
-		allowNull: false,
-	},
-	hasBeenReviewed: {
-		type: Sequelize.TEXT,
-		allowNull: false,
-	},
-	interestedInTopic: {
-		type: Sequelize.BOOLEAN,
-		allowNull: false,
-	},
-	feedback: {
-		type: Sequelize.TEXT,
-		allowNull: false,
-	},
-	workerId: {
-		type: Sequelize.TEXT,
-	},
-	assignmentId: {
-		type: Sequelize.TEXT,
-	},
-	hitId: {
-		type: Sequelize.TEXT,
-	},
+	mode: { type: Sequelize.INTEGER },
+	reviewContent: { type: Sequelize.TEXT },
+	reviewRating: { type: Sequelize.INTEGER },
+	offsetValues: { type: Sequelize.TEXT },
+	offsetInteractions: { type: Sequelize.TEXT },
+	timeOnReview: { type: Sequelize.TEXT },
+	scrollValues: { type: Sequelize.TEXT },
+	levelOfEducation: { type: Sequelize.TEXT },
+	isScientist: { type: Sequelize.BOOLEAN },
+	hasReviewed: { type: Sequelize.TEXT },
+	hasBeenReviewed: { type: Sequelize.TEXT },
+	interestedInTopic: { type: Sequelize.BOOLEAN },
+	feedback: { type: Sequelize.TEXT },
+	workerId: { type: Sequelize.TEXT },
+	assignmentId: { type: Sequelize.TEXT },
+	hitId: { type: Sequelize.TEXT },
 });
 
 const db = {

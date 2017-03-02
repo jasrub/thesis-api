@@ -8,7 +8,7 @@ require('../config.js');
 const config = {
 	access: process.env.AWS_ACCESS_KEY_ID,
 	secret: process.env.AWS_SECRET_ACCESS_KEY,
-	sandbox: true
+	sandbox: true // CHANGE EXTERNAL QUESTION URL
 };
 
 let mturkClient;
@@ -45,7 +45,7 @@ mturk.createClient(config)
 	})
 	.then(function(xmlQuestion) {
 		const params = {
-			Title: 'Test our MTurk Pipeline (Can complete in 30s)',
+			Title: 'Test our MTurk Pipeline (Can complete in 40s)',
 			Description: 'Simply fill in example text and test our submission/approval pipeline',
 			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 			// AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
