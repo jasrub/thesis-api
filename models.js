@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 if (process.env.NODE_ENV !== 'production') {
 	require('./config.js');
 }
@@ -24,6 +23,8 @@ sequelize.sync({ force: false });
 
 const Dinosaur = sequelize.define('Dinosaur', {
 	mode: { type: Sequelize.INTEGER },
+	identifiedError: { type: Sequelize.BOOLEAN },
+	identifiedConclusion: { type: Sequelize.BOOLEAN },
 	reviewContent: { type: Sequelize.TEXT },
 	reviewRating: { type: Sequelize.INTEGER },
 	offsetValues: { type: Sequelize.TEXT },

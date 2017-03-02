@@ -8,7 +8,7 @@ require('../config.js');
 const config = {
 	access: process.env.AWS_ACCESS_KEY_ID,
 	secret: process.env.AWS_SECRET_ACCESS_KEY,
-	sandbox: true // CHANGE EXTERNAL QUESTION URL
+	sandbox: false // CHANGE EXTERNAL QUESTION URL
 };
 
 let mturkClient;
@@ -45,15 +45,15 @@ mturk.createClient(config)
 	})
 	.then(function(xmlQuestion) {
 		const params = {
-			Title: 'Test our MTurk Pipeline (Can complete in 40s)',
+			Title: 'Test our MTurk Pipeline (Under a minute)',
 			Description: 'Simply fill in example text and test our submission/approval pipeline',
 			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 			// AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
 			AssignmentDurationInSeconds: 360, // Allow 60 minutes to answer 
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
-			MaxAssignments: 8, // 1 worker responses 
+			MaxAssignments: 10, // 1 worker responses 
 			LifetimeInSeconds: 86400 * 1, // Expire in 1 days 
-			Reward: { CurrencyCode: 'USD', Amount: 0.15 },
+			Reward: { CurrencyCode: 'USD', Amount: 0.10 },
 		};
 		return mturkClient.req('CreateHIT', params);
 	})
