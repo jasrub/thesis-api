@@ -1,4 +1,4 @@
-process.env.DATABASE_URL = '<YOUR-POSTGRES-URI>';
+process.env.DATABASE_URL = 'postgresql://localhost';
 
 process.env.AWS_ACCESS_KEY_ID = '<AWS_ACCESS_KEY_ID>';
 process.env.AWS_SECRET_ACCESS_KEY = '<AWS_SECRET_ACCESS_KEY>';

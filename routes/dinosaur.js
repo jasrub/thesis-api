@@ -81,3 +81,7 @@ export function postDinosaur(req, res, next) {
 	// });
 }
 app.post('/dino', postDinosaur);
+
+app.get('/', function(req, res) {
+    return res.status(201).json('News Explore API');
+});

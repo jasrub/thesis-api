@@ -32,8 +32,8 @@ const whitelist = [
 	'http://localhost:3000',
 
 	// Primary
-	'https://experiments.pubpub.org',
-	'https://dev-experiments.pubpub.org',
+	// 'https://experiments.pubpub.org',
+	// 'https://dev-experiments.pubpub.org',
 ];
 
 const corsOptions = {
@@ -74,6 +74,7 @@ if (process.env.WORKER !== 'true') {
 	/* ------------------- */
 	require('./routes/reviewDiff.js');
 	require('./routes/dinosaur.js');
+    require('./routes/descriptor.js');
 
 	/* ------------------- */
 	/* ------------------- */
