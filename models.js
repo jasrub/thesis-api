@@ -38,24 +38,32 @@ const Descriptor = sequelize.define('Descriptor', {
     {timestamps: false,}
 );
 
-const DescriptorsResult = sequelize.define('DescriptorsResults', {
+const DescriptorsResult = sequelize.define('DescriptorsResult', {
     descriptorId: { type: Sequelize.TEXT },
 	storyId: {type: Sequelize.TEXT},
 	score: {type: Sequelize.DOUBLE},},
     {timestamps: false,});
+
+const Connection = sequelize.define('Connection', {
+    origin: { type: Sequelize.TEXT },
+    dest: { type: Sequelize.TEXT },
+    count: { type: Sequelize.INTEGER },},
+    {timestamps: false,}
+);
+
 
 DescriptorsResult.belongsTo(Descriptor, {foreignKey: 'descriptorId'});
 Descriptor.hasMany(DescriptorsResult, {foreignKey: 'descriptorId'});
 Story.hasMany(DescriptorsResult, { foreignKey: 'storyId' });
 DescriptorsResult.belongsTo(Story, {foreignKey: 'storyId'});
 
-sequelize.sync({ force: false });
 
 
 const db = {
     Story: Story,
     Descriptor: Descriptor,
     DescriptorsResult: DescriptorsResult,
+    Connection: Connection
 };
 
 db.sequelize = sequelize;

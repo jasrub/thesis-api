@@ -1,5 +1,5 @@
 import app from '../server';
-import { Descriptor, DescriptorsResult, Story, sequelize } from '../models';
+import { Descriptor, DescriptorsResult, Story, Connection, sequelize } from '../models';
 
 export function getDescriptors(req, res, next) {
     return Descriptor.findAll({})
@@ -11,7 +11,7 @@ export function getDescriptors(req, res, next) {
             return res.status(500).json(err);
         });
 }
-app.get('/all_descriptors', getDescriptors);
+app.get('/descriptors/all', getDescriptors);
 
 
 export function sortedDescriptors(req, res, next) {
@@ -19,14 +19,8 @@ export function sortedDescriptors(req, res, next) {
         include: [ {model: DescriptorsResult,
             include: [ {model: Story, attributes: ['url', 'title'] }],
             order: ['score' , 'DESC']}, ],
-        //attributes: [sequelize.fn('SUM', sequelize.col('DescriptorsResults.score')), 'totalScore']
-        // order: [ [ DescriptorsResult, 'score', 'DESC' ]]
-
-        //attributes: { include: [[sequelize.fn('COUNT', sequelize.col('DescriptorsResults')), 'no_stories']] }
-        // attributes: [[sequelize.fn('COUNT', sequelize.col('DescriptorsResults')), 'no_stories']],
     })
         .then(function(descriptors) {
-            console.log(descriptors)
             return res.status(201).json(descriptors);
         })
         .catch(function(err) {
@@ -34,14 +28,31 @@ export function sortedDescriptors(req, res, next) {
             return res.status(500).json(err);
         });
 }
-app.get('/descriptors', sortedDescriptors);
+app.get('/descriptors/sorted', sortedDescriptors);
+
+export function descriptorsConnections(req, res, next) {
+    const param = req.query.q;
+    return Connection.findAll({
+        attributes: ['dest', 'count'],
+        where: {origin: {$like:`${param}`}},
+        order:'count DESC',
+    })
+        .then(function(connections) {
+            return res.status(201).json(connections);
+        })
+        .catch(function(err) {
+            console.error('Error in getDescriptors: ', err);
+            return res.status(500).json(err);
+        });
+}
+app.get('/descriptors/relations', descriptorsConnections);
 
 export function search(req, res, next) {
     const param = req.query.q;
     return Descriptor.findAll({
         include: [ {model: DescriptorsResult, required:true,
             include: [ {model: Story, attributes: ['url', 'title'] }],
-            order: ['score' , 'DESC']}, ],
+            order: 'score DESC'}, ],
         where: {id:{$like: `%${param}%`}}
         //attributes: [sequelize.fn('SUM', sequelize.col('DescriptorsResults.score')), 'totalScore']
         // order: [ [ DescriptorsResult, 'score', 'DESC' ]]
@@ -57,4 +68,4 @@ export function search(req, res, next) {
             return res.status(500).json(err);
         });
 }
-app.get('/search', search);
+app.get('/descriptors/search', search);
