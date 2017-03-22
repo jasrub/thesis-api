@@ -54,6 +54,10 @@ const Connection = sequelize.define('Connection', {
 
 DescriptorsResult.belongsTo(Descriptor, {foreignKey: 'descriptorId'});
 Descriptor.hasMany(DescriptorsResult, {foreignKey: 'descriptorId'});
+
+Connection.belongsTo(Descriptor, { foreignKey: 'origin' });
+Descriptor.hasMany(Connection, { foreignKey: 'origin' });
+
 Story.hasMany(DescriptorsResult, { foreignKey: 'storyId' });
 DescriptorsResult.belongsTo(Story, {foreignKey: 'storyId'});
 

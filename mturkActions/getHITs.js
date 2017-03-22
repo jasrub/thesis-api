@@ -28,7 +28,7 @@ mturk.createClient(config)
 // })
 
 // .then(function() { 
-// 	// Search HITs
+// 	// search HITs
 // 	return api.req('SearchHITs', { PageSize: 10 })
 // 	.then(function(res){
 // 		console.log('Got HITs ', JSON.stringify(res, null, 2));

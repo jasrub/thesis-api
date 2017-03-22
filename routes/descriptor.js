@@ -16,12 +16,28 @@ app.get('/descriptors/all', getDescriptors);
 
 export function sortedDescriptors(req, res, next) {
     return Descriptor.findAll({
-        include: [ {model: DescriptorsResult,
-            include: [ {model: Story, attributes: ['url', 'title'] }],
-            order: ['score' , 'DESC']}, ],
+        include: [
+            {model: DescriptorsResult,
+                include: [ {model: Story, attributes: ['url', 'title', 'mediaName', 'isMediaCloud', 'isSuperglue'] }],
+                order: 'score DESC',
+            },
+        ],
+        //where: sequelize.where(sequelize.fn('array_length', sequelize.col('DescriptorsResults')), {$gt: 0})
+
     })
         .then(function(descriptors) {
-            return res.status(201).json(descriptors);
+            const result = {};
+            descriptors.forEach((desc)=>{
+                const obj = desc.dataValues;
+                if (obj.DescriptorsResults.length>0) {
+                    obj.score = obj.DescriptorsResults.reduce((acc, val) => acc + val.score, 0);
+                    obj.numStories = obj.DescriptorsResults.length;
+                    obj.avgScore = obj.score / obj.numStories;
+                    result[desc.id] = obj
+                }
+                }
+            );
+            return res.status(201).json(result);
         })
         .catch(function(err) {
             console.error('Error in getDescriptors: ', err);
@@ -36,6 +52,7 @@ export function descriptorsConnections(req, res, next) {
         attributes: ['dest', 'count'],
         where: {origin: {$like:`${param}`}},
         order:'count DESC',
+        limit:7,
     })
         .then(function(connections) {
             return res.status(201).json(connections);
@@ -45,13 +62,13 @@ export function descriptorsConnections(req, res, next) {
             return res.status(500).json(err);
         });
 }
-app.get('/descriptors/relations', descriptorsConnections);
+app.get('/descriptors/related', descriptorsConnections);
 
 export function search(req, res, next) {
     const param = req.query.q;
     return Descriptor.findAll({
         include: [ {model: DescriptorsResult, required:true,
-            include: [ {model: Story, attributes: ['url', 'title'] }],
+            include: [ {model: Story, attributes: ['url', 'title', 'mediaName', 'isMediaCloud', 'isSuperglue'] }],
             order: 'score DESC'}, ],
         where: {id:{$like: `%${param}%`}}
         //attributes: [sequelize.fn('SUM', sequelize.col('DescriptorsResults.score')), 'totalScore']
