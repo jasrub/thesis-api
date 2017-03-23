@@ -72,7 +72,7 @@ if (process.env.WORKER !== 'true') {
 	/* ------------------- */
 	/* API Endpoints */
 	/* ------------------- */
-	// require('./routes/dinosaur.js');
+	require('./routes/story.js');
     require('./routes/descriptor.js');
 
 	/* ------------------- */

@@ -18,26 +18,14 @@ export function sortedDescriptors(req, res, next) {
     return Descriptor.findAll({
         include: [
             {model: DescriptorsResult,
-                include: [ {model: Story, attributes: ['url', 'title', 'mediaName', 'isMediaCloud', 'isSuperglue'] }],
+                attributes: ['storyId', 'score'],
                 order: 'score DESC',
             },
         ],
-        //where: sequelize.where(sequelize.fn('array_length', sequelize.col('DescriptorsResults')), {$gt: 0})
 
     })
         .then(function(descriptors) {
-            const result = {};
-            descriptors.forEach((desc)=>{
-                const obj = desc.dataValues;
-                if (obj.DescriptorsResults.length>0) {
-                    obj.score = obj.DescriptorsResults.reduce((acc, val) => acc + val.score, 0);
-                    obj.numStories = obj.DescriptorsResults.length;
-                    obj.avgScore = obj.score / obj.numStories;
-                    result[desc.id] = obj
-                }
-                }
-            );
-            return res.status(201).json(result);
+            return res.status(201).json(descriptors);
         })
         .catch(function(err) {
             console.error('Error in getDescriptors: ', err);
