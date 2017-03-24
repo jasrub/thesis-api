@@ -29,7 +29,12 @@ const Story = sequelize.define('Story', {
     publishDate: { type: Sequelize.TEXT },
     mediaName: { type: Sequelize.TEXT },
     collectDate: { type: Sequelize.TEXT },
-    mediaUrl: { type: Sequelize.TEXT },},
+    mediaUrl: { type: Sequelize.TEXT },
+    image: {type: Sequelize.TEXT},
+    leftRight: {type: Sequelize.INTEGER},
+    posNeg: {type: Sequelize.INTEGER},
+    trend: {type: Sequelize.INTEGER},
+    cont: {type: Sequelize.INTEGER},},
     {timestamps: false}
 );
 

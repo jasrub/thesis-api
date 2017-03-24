@@ -15,17 +15,39 @@ app.get('/descriptors/all', getDescriptors);
 
 
 export function sortedDescriptors(req, res, next) {
+    const filters = JSON.parse(req.query.filters);
+    const storyWhere = {};
+    Object.keys(filters).forEach((filterName)=>{
+        const filter = filters[filterName];
+        if (filter.on) {
+            storyWhere[filterName]={$between:[filter.val-0.5, filter.val+0.5]}
+        }
+    });
     return Descriptor.findAll({
         include: [
             {model: DescriptorsResult,
+                include:[{model: Story, where:storyWhere, attributes:['id'], required: true }],
                 attributes: ['storyId', 'score'],
                 order: 'score DESC',
+                required: true,
             },
         ],
 
     })
         .then(function(descriptors) {
-            return res.status(201).json(descriptors);
+            Story.count({where: storyWhere}).then(function (storiesCount) {
+                const result = {};
+                descriptors.forEach((desc) => {
+                        const obj = desc.dataValues;
+                        obj.score = obj.DescriptorsResults.reduce((acc, val) => acc + val.score, 0);
+                        obj.numStories = Math.round((obj.DescriptorsResults.length/storiesCount)*100);
+                        obj.avgScore = obj.score / obj.numStories;
+                        result[desc.id] = obj
+                    }
+                );
+
+                return res.status(201).json({'descriptors': result, 'storyCount': storiesCount});
+            });
         })
         .catch(function(err) {
             console.error('Error in getDescriptors: ', err);
