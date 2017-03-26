@@ -32,8 +32,7 @@ const whitelist = [
 	'http://localhost:3000',
 
 	// Primary
-	// 'https://experiments.pubpub.org',
-	// 'https://dev-experiments.pubpub.org',
+	'https://news-explore.um-dokku.media.mit.edu',
 ];
 
 const corsOptions = {
