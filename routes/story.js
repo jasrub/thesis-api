@@ -1,8 +1,9 @@
 import app from '../server';
 import {  Story,  sequelize } from '../models';
 import google from 'googleapis';
-
-require('../config.js');
+if (process.env.NODE_ENV !== 'production') {
+    require('../config.js');
+}
 
 const config = {
     key: process.env.GOOGLE_API_KEY,
