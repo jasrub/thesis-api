@@ -18,6 +18,7 @@ export function getStories(req, res, next) {
             const result = {};
             stories.forEach((story)=>{
                 const obj = story.dataValues;
+                obj.showImage = Math.random()>0.4;
                 result[story.id] = obj
             });
             return res.status(201).json(result);

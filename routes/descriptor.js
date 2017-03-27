@@ -13,16 +13,21 @@ export function getDescriptors(req, res, next) {
 }
 app.get('/descriptors/all', getDescriptors);
 
-
-export function sortedDescriptors(req, res, next) {
-    const filters = JSON.parse(req.query.filters);
+function parseFilters(filtersJSON) {
+    const filters = JSON.parse(filtersJSON);
     const storyWhere = {};
     Object.keys(filters).forEach((filterName)=>{
         const filter = filters[filterName];
         if (filter.on) {
-            storyWhere[filterName]={$between:[filter.val-0.5, filter.val+0.5]}
+            storyWhere[filterName]={$between:[filter.val-0.5, filter.val+0.5]};
         }
     });
+    return storyWhere;
+}
+
+export function sortedDescriptors(req, res, next) {
+    const storyWhere = parseFilters(req.query.filters);
+
     return Descriptor.findAll({
         include: [
             {model: DescriptorsResult,
@@ -42,6 +47,7 @@ export function sortedDescriptors(req, res, next) {
                         obj.score = obj.DescriptorsResults.reduce((acc, val) => acc + val.score, 0);
                         obj.numStories = Math.round((obj.DescriptorsResults.length/storiesCount)*100);
                         obj.avgScore = obj.score / obj.numStories;
+                        obj.DescriptorsResults.sort((a, b)=>(b.score-a.score));
                         result[desc.id] = obj
                     }
                 );
@@ -81,11 +87,6 @@ export function search(req, res, next) {
             include: [ {model: Story, attributes: ['url', 'title', 'mediaName', 'isMediaCloud', 'isSuperglue'] }],
             order: 'score DESC'}, ],
         where: {id:{$like: `%${param}%`}}
-        //attributes: [sequelize.fn('SUM', sequelize.col('DescriptorsResults.score')), 'totalScore']
-        // order: [ [ DescriptorsResult, 'score', 'DESC' ]]
-
-        //attributes: { include: [[sequelize.fn('COUNT', sequelize.col('DescriptorsResults')), 'no_stories']] }
-        // attributes: [[sequelize.fn('COUNT', sequelize.col('DescriptorsResults')), 'no_stories']],
     })
         .then(function(descriptors) {
             return res.status(201).json(descriptors);
@@ -95,4 +96,30 @@ export function search(req, res, next) {
             return res.status(500).json(err);
         });
 }
+
 app.get('/descriptors/search', search);
+
+function getSourceCounts(filters) {
+    const storyWhere = parseFilters(filters);
+    return Story.aggregate('id', 'COUNT', {
+        plain: false,
+            where:storyWhere,
+            group: [ 'mediaName' ],
+            attributes: [ 'mediaName' ]});
+}
+
+export function sourceCounts(req, res, next) {
+    return getSourceCounts(req.query.filters)
+        .then(function (counts) {
+            const result = {};
+            counts.forEach((source) => {
+                result[source.mediaName] = source.COUNT;
+            });
+            res.status(201).json(result);
+        })
+        .catch(function (err) {
+            console.error('Error in sources count: ', err);
+            return res.status(500).json(err);
+        });
+}
+app.get('/descriptors/source_count', sourceCounts);
