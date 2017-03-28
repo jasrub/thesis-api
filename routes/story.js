@@ -14,6 +14,12 @@ var customsearch = google.customsearch('v1');
 
 export function getStories(req, res, next) {
     return Story.findAll({
+        where: {
+            publishDate: {
+                $lt: new Date(),
+                $gt: new Date(new Date() - 48 * 60 * 60 * 1000)
+            }
+        },
         include:[{model:DescriptorsResult, attributes:['descriptorId', 'score']}]
     })
         .then(function(stories) {

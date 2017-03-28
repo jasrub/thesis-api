@@ -18,8 +18,12 @@ function parseFilters(filtersJSON) {
     const storyWhere = {};
     Object.keys(filters).forEach((filterName)=>{
         const filter = filters[filterName];
-        storyWhere[filterName]={$between:[filter.min, filter.max]};
+        storyWhere[filterName]={$between:[filter.min-0.01, filter.max+0.01]};
     });
+    storyWhere.publishDate =  {
+        $lt: new Date(),
+        $gt: new Date(new Date() - 48 * 60 * 60 * 1000)
+    };
     return storyWhere;
 }
 
