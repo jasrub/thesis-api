@@ -18,9 +18,7 @@ function parseFilters(filtersJSON) {
     const storyWhere = {};
     Object.keys(filters).forEach((filterName)=>{
         const filter = filters[filterName];
-        if (filter.on) {
-            storyWhere[filterName]={$between:[filter.val-0.5, filter.val+0.5]};
-        }
+        storyWhere[filterName]={$between:[filter.min, filter.max]};
     });
     return storyWhere;
 }

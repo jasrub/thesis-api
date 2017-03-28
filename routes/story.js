@@ -1,5 +1,5 @@
 import app from '../server';
-import {  Story,  sequelize } from '../models';
+import {  Story, DescriptorsResult,  sequelize } from '../models';
 import google from 'googleapis';
 if (process.env.NODE_ENV !== 'production') {
     require('../config.js');
@@ -13,7 +13,9 @@ const config = {
 var customsearch = google.customsearch('v1');
 
 export function getStories(req, res, next) {
-    return Story.findAll({})
+    return Story.findAll({
+        include:[{model:DescriptorsResult, attributes:['descriptorId', 'score']}]
+    })
         .then(function(stories) {
             const result = {};
             stories.forEach((story)=>{
