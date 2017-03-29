@@ -22,7 +22,7 @@ function parseFilters(filtersJSON) {
     });
     storyWhere.publishDate =  {
         $lt: new Date(),
-        $gt: new Date(new Date() - 48 * 60 * 60 * 1000)
+        $gt: new Date(new Date() - 24 * 60 * 60 * 1000)
     };
     return storyWhere;
 }

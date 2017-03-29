@@ -34,7 +34,7 @@ const Story = sequelize.define('Story', {
     leftRight: {type: Sequelize.INTEGER},
     posNeg: {type: Sequelize.INTEGER},
     trend: {type: Sequelize.INTEGER},
-    cont: {type: Sequelize.INTEGER},},
+    objective: {type: Sequelize.INTEGER},},
     {timestamps: false}
 );
 
