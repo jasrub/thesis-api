@@ -72,6 +72,7 @@ if (process.env.WORKER !== 'true') {
 	/* API Endpoints */
 	/* ------------------- */
 	require('./routes/story.js');
+    require('./routes/label.js');
     require('./routes/descriptor.js');
 
 	/* ------------------- */

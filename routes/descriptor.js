@@ -22,7 +22,7 @@ function parseFilters(filtersJSON) {
     });
     storyWhere.publishDate =  {
         $lt: new Date(),
-        $gt: "2017-03-28 13:53:14"
+        $gt: "2017-03-29 17:00:01"
     };
     return storyWhere;
 }
@@ -37,6 +37,8 @@ export function sortedDescriptors(req, res, next) {
                 attributes: ['storyId', 'score'],
                 order: 'score DESC',
                 required: true,
+                //separate: true,
+                //limit:100, // if want limit, remove attributes. couldn't see any efficiency improvments
             },
         ],
 

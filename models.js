@@ -31,10 +31,13 @@ const Story = sequelize.define('Story', {
     collectDate: { type: Sequelize.TEXT },
     mediaUrl: { type: Sequelize.TEXT },
     image: {type: Sequelize.TEXT},
-    leftRight: {type: Sequelize.INTEGER},
-    posNeg: {type: Sequelize.INTEGER},
-    trend: {type: Sequelize.INTEGER},
-    objective: {type: Sequelize.INTEGER},},
+    leftRight: {type: Sequelize.FLOAT},
+    posNeg: {type: Sequelize.FLOAT},
+    trend: {type: Sequelize.FLOAT},
+    objective: {type: Sequelize.FLOAT},
+    isMediaCloud: {type: Sequelize.BOOLEAN},
+    isSuperglue: {type: Sequelize.BOOLEAN},
+    },
     {timestamps: false}
 );
 
@@ -56,6 +59,18 @@ const Connection = sequelize.define('Connection', {
     {timestamps: false,}
 );
 
+const Label = sequelize.define('Label', {
+        id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+        storyId: {type: Sequelize.TEXT},
+        isMediaCloud: {type: Sequelize.BOOLEAN},
+        isSuperglue: {type: Sequelize.BOOLEAN},
+        leftRight: {type: Sequelize.FLOAT},
+        posNeg: {type: Sequelize.FLOAT},
+        trend: {type: Sequelize.FLOAT},
+        objective: {type: Sequelize.FLOAT},
+        isUsed: {type: Sequelize.BOOLEAN, defaultValue:false},},
+        {omitNull:true}
+);
 
 DescriptorsResult.belongsTo(Descriptor, {foreignKey: 'descriptorId'});
 Descriptor.hasMany(DescriptorsResult, {foreignKey: 'descriptorId'});
@@ -66,13 +81,16 @@ Descriptor.hasMany(Connection, { foreignKey: 'origin' });
 Story.hasMany(DescriptorsResult, { foreignKey: 'storyId' });
 DescriptorsResult.belongsTo(Story, {foreignKey: 'storyId'});
 
+Story.hasMany(Label, { foreignKey: 'storyId' });
+
 
 
 const db = {
     Story: Story,
     Descriptor: Descriptor,
     DescriptorsResult: DescriptorsResult,
-    Connection: Connection
+    Connection: Connection,
+    Label: Label,
 };
 
 db.sequelize = sequelize;
