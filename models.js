@@ -23,7 +23,8 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, { logging: false, dial
 sequelize.sync({ force: false });
 
 const Story = sequelize.define('Story', {
-    mediaId: { type: Sequelize.INTEGER },
+    id: {type: Sequelize.STRING, primaryKey: true},
+    mediaId: { type: Sequelize.STRING},
     title: { type: Sequelize.TEXT },
     url: { type: Sequelize.TEXT },
     publishDate: { type: Sequelize.TEXT },
@@ -38,7 +39,6 @@ const Story = sequelize.define('Story', {
     isMediaCloud: {type: Sequelize.BOOLEAN},
     isSuperglue: {type: Sequelize.BOOLEAN},
     },
-    {timestamps: false}
 );
 
 const Descriptor = sequelize.define('Descriptor', {
@@ -49,8 +49,7 @@ const Descriptor = sequelize.define('Descriptor', {
 const DescriptorsResult = sequelize.define('DescriptorsResult', {
     descriptorId: { type: Sequelize.TEXT },
 	storyId: {type: Sequelize.TEXT},
-	score: {type: Sequelize.DOUBLE},},
-    {timestamps: false,});
+	score: {type: Sequelize.DOUBLE},});
 
 const Connection = sequelize.define('Connection', {
     origin: { type: Sequelize.TEXT },

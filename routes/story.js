@@ -17,7 +17,7 @@ export function getStories(req, res, next) {
         where: {
             publishDate: {
                 $lt: new Date(),
-                $gt: "2017-03-29 17:00:01"
+                $gt: "2017-04-11 17:00:01"
             }
         },
         include:[{model:DescriptorsResult, attributes:['descriptorId', 'score']}]

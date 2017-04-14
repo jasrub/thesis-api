@@ -22,7 +22,7 @@ function parseFilters(filtersJSON) {
     });
     storyWhere.publishDate =  {
         $lt: new Date(),
-        $gt: "2017-03-29 17:00:01"
+        $gt: "2017-04-11 17:00:01"
     };
     return storyWhere;
 }
@@ -49,9 +49,10 @@ export function sortedDescriptors(req, res, next) {
                 descriptors.forEach((desc) => {
                         const obj = desc.dataValues;
                         obj.score = obj.DescriptorsResults.reduce((acc, val) => acc + val.score, 0);
-                        obj.numStories = Math.round((obj.DescriptorsResults.length/storiesCount)*100);
+                        obj.numStories = obj.DescriptorsResults.length;
+                        obj.storiesPercent = Math.round((obj.DescriptorsResults.length/storiesCount)*100);
                         obj.avgScore = obj.score / obj.numStories;
-                        obj.DescriptorsResults.sort((a, b)=>(b.score-a.score));
+                        obj.DescriptorsResults.sort((a, b)=>(b.numStories-a.numStories));
                         result[desc.id] = obj
                     }
                 );
