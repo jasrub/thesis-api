@@ -67,7 +67,9 @@ const Label = sequelize.define('Label', {
         posNeg: {type: Sequelize.FLOAT},
         trend: {type: Sequelize.FLOAT},
         objective: {type: Sequelize.FLOAT},
-        isUsed: {type: Sequelize.BOOLEAN, defaultValue:false},},
+        isUsed: {type: Sequelize.BOOLEAN, defaultValue:false},
+        sessionId: {type: Sequelize.TEXT}
+    },
         {omitNull:true}
 );
 

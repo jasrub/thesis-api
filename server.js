@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import cors from 'cors';
+import session from 'express-session';
 
 /* -------------------------------- */
 /* Initialize development variables */
@@ -22,6 +23,11 @@ export default app;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 
 /* -------- */

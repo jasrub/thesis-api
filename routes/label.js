@@ -10,7 +10,8 @@ export function postLabel(req, res, next) {
         posNeg: req.body.filters.posNeg.val,
         trend: req.body.filters.trend.val,
         objective: req.body.filters.objective.val,
-        isUsed: false
+        isUsed: false,
+        sessionId: req.session.id,
     })
         .then(function(result) {
             return res.status(201).json(true);
