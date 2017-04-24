@@ -13,11 +13,14 @@ const config = {
 var customsearch = google.customsearch('v1');
 
 export function getStories(req, res, next) {
+    const now = new Date();
+    let before = new Date();
+    before.setDate(before.getDate() - 2);
     return Story.findAll({
         where: {
             publishDate: {
-                $lt: new Date(),
-                $gt: "2017-04-11 17:00:01"
+                $lt: now,
+                $gt: before
             }
         },
         include:[{model:DescriptorsResult, attributes:['descriptorId', 'score']}]
