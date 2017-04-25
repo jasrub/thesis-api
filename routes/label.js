@@ -11,7 +11,7 @@ export function postLabel(req, res, next) {
         trend: req.body.filters.trend.val,
         objective: req.body.filters.objective.val,
         isUsed: false,
-        sessionId: req.session.id,
+        sessionId: req.cookies['connect.sid'],
     })
         .then(function(result) {
             return res.status(201).json(true);
