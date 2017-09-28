@@ -15,7 +15,7 @@ var customsearch = google.customsearch('v1');
 export function getStories(req, res, next) {
     const now = new Date(2017, 9, 23);
     let before = new Date();
-    before.setDate(now.getDate() - 2);
+    before.setDate(now.getDate() - 1.5);
     return Story.findAll({
         where: {
             publishDate: {
