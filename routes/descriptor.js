@@ -22,7 +22,7 @@ function parseFilters(filtersJSON) {
     });
     const now = new Date(2017, 10,12);
     let before = new Date();
-    before.setDate(now.getDate() - 2);
+    before.setDate(now.getDate() - 1.5);
     storyWhere.publishDate =  {
         $lt: now,
         $gt: before
