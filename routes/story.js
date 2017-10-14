@@ -13,7 +13,7 @@ const config = {
 var customsearch = google.customsearch('v1');
 
 export function getStories(req, res, next) {
-    const now = new Date(2017, 10, 9);
+    const now = new Date();
     let before = new Date();
     before.setDate(now.getDate() - 1.5);
     return Story.findAll({

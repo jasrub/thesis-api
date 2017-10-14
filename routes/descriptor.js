@@ -20,7 +20,7 @@ function parseFilters(filtersJSON) {
         const filter = filters[filterName];
         storyWhere[filterName]={$between:[filter.min-0.01, filter.max+0.01]};
     });
-    const now = new Date(2017, 10, 9);
+    const now = new Date();
     let before = new Date();
     before.setDate(now.getDate() - 1.5);
     storyWhere.publishDate =  {
