@@ -13,9 +13,11 @@ const config = {
 var customsearch = google.customsearch('v1');
 
 export function getStories(req, res, next) {
-    const now = new Date();
-    let before = new Date();
-    before.setDate(now.getDate() - 1.5);
+    const now = new Date('2018,2,15');
+    let before = new Date('2018,2,14');
+    // before.setDate(now.getDate() - 2);
+    console.log(now);
+    console.log(before);
     return Story.findAll({
         where: {
             publishDate: {
@@ -26,6 +28,7 @@ export function getStories(req, res, next) {
         include:[{model:DescriptorsResult, attributes:['descriptorId', 'score']}]
     })
         .then(function(stories) {
+            console.log(stories.length)
             const result = {};
             stories.forEach((story)=>{
                 const obj = story.dataValues;
