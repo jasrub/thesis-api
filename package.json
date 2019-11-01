@@ -45,7 +45,7 @@
     "pg": "^6.1.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
-    "sequelize": "^3.30.0",
+    "sequelize": "^5.21.2",
     "xml-escape": "^1.1.0"
   }
 }
